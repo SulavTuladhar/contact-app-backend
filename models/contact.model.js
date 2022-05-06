@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
+const contactSchema = new mongoose.Schema({
     name:{
         type: String,
         lowercase: true,
-        unique: true,
         trim: true
     },
     phoneNumber: {
@@ -16,4 +15,4 @@ const UserSchema = new mongoose.Schema({
 },{
     timestamps: true
 })
-module.exports = mongoose.model('user', UserSchema);
+module.exports = mongoose.model('contact', contactSchema);
