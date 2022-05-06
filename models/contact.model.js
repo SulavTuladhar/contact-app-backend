@@ -2,14 +2,12 @@ const mongoose = require('mongoose');
 
 const contactSchema = new mongoose.Schema({
     name:{
-        type: String,
-        lowercase: true,
-        trim: true
+        type: String
     },
     phoneNumber: {
         type: String
     },
-    photo: {
+    image: {
         type: String
     }
 },{

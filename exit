@@ -1,0 +1,29 @@
+[33mcommit 5220cc26a70ab1abb924dd14076097a32210adc3[m[33m ([m[1;36mHEAD -> [m[1;32mBE01-contactapp[m[33m)[m
+Author: Sulav Tuladhar <sulav.tuladhar@dev.itglance.org>
+Date:   Fri May 6 15:03:55 2022 +0545
+
+    file upload
+
+[33mcommit 0db4bb9e7dbbbecee25755629776db4ef5efd814[m
+Author: Sulav Tuladhar <sulav.tuladhar@dev.itglance.org>
+Date:   Fri May 6 14:33:24 2022 +0545
+
+    database modeling
+
+[33mcommit bab3b1e50502ff95cde19d47a8a72840aa31e44a[m
+Author: Sulav Tuladhar <sulav.tuladhar@dev.itglance.org>
+Date:   Fri May 6 14:21:03 2022 +0545
+
+    importing & loading inbuilt & third party middlewares
+
+[33mcommit bb133fdb3651e30a0c5544ae36cf7704a0bdf4a2[m
+Author: Sulav Tuladhar <sulav.tuladhar@dev.itglance.org>
+Date:   Fri May 6 14:16:53 2022 +0545
+
+    error handling middleware
+
+[33mcommit cb59a27f29041a6274aa0a9195e645c1faae9af1[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/BE01-contactapp[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Sulav Tuladhar <sulav.tuladhar@dev.itglance.org>
+Date:   Fri May 6 14:11:58 2022 +0545
+
+    Server started

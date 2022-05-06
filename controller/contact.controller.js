@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const contactModel = require('./../models/contact.model');
 const uploader = require('./../middlewares/uploader');
+const fs = require('fs');
+const path = require('path');
 
 function MAP_CONTACT_REQUIEST(newContact, contactData){
     if(contactData.name)
@@ -26,23 +28,25 @@ router.route('/')
                 res.json(users)
             })
     })
-    .post(uploader.single('image'),function(req,res,next){
+    .post(uploader.single('image'), function(req,res,next){
         if(req.fileTypeError){
+            console.log('yo error ma aayo');
             return next({
                 msg: 'Invalid file format',
                 status: 414
             })
         }
         console.log('req >>', req.body);
+        console.log('req >>', req.file);
         if(req.file){
             req.body.image = req.file.filename;
         }
         var newContact = new contactModel({});
-        console.log('mapped contact >>', req);
         var mappedContact =  MAP_CONTACT_REQUIEST(newContact, req.body);
         console.log('mapped contact >>', mappedContact);
         mappedContact.save(function(err,saved){
             if(err){
+                console.log('this error ');
                 return next(err);
             }
             res.json(saved);
@@ -66,10 +70,18 @@ router.route('/:id')
         })
     })
 
-    .put(function(req,res,next){
+    .put(uploader.single('image'), function(req,res,next){
         const id = req.params.id;
         const data = req.body;
-
+        if(req.fileTypeError){
+            return next({
+                msg: 'Invalid File Format',
+                status: 414
+            })
+        }
+        if(req.file){
+            data.image = req.file.filename;
+        }
         contactModel.findById(id, function(err,user){
             if(err){
                 return next(err)
@@ -80,11 +92,21 @@ router.route('/:id')
                     status: 404
                 })
             }
-
+            var oldImage = user.image;
             var mappedUpdatedContact = MAP_CONTACT_REQUIEST(user, data)
+            
             mappedUpdatedContact.save(function(err,updated){
                 if(err){
                     return next(err);
+                }
+                if(req.file){
+                    fs.unlink(path.join(process.cwd(),'uploads/images/' + oldImage), function(err,removed){
+                        if(err){
+                            console.log('Error while removing ', err);
+                        }else{
+                            console.log('Sucessfully removed old image');
+                        }
+                    })
                 }
                 res.json(updated)
             })
@@ -103,10 +125,18 @@ router.route('/:id')
                     status: 404
                 })
             }
+            var oldImage = user.image;
             user.remove(function(err,removed){
                 if(err){
                     return next(err);
                 }
+                fs.unlink(path.join(process.cwd(),'uploads/images/' + oldImage), function(err,removed){
+                    if(err){
+                        console.log('Error while removing ', err);
+                    }else{
+                        console.log('Sucessfully removed old image');
+                    }
+                })
                 res.json(removed)
             })
         })
