@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = 9090;
-
+require('./db_init')
 // Importing api router
 const API_ROUTER = require('./api_route');
 
